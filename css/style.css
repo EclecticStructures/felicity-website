@@ -922,7 +922,7 @@ a   { color: inherit; }
     .nav-links.open { display: flex; }
 
     .nav-links li a {
-        padding: 18px 28px;
+        padding: 22px 28px;
         font-size: 1.1rem;
     }
     .nav-divider { display: none; }
