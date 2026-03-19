@@ -1,0 +1,861 @@
+/* =========================================
+   FELICITY CONTRACT FURNISHINGS
+   style.css
+   ========================================= */
+
+/* ----- FONTS ----- */
+@font-face {
+    font-family: 'SnellRoundhand';
+    src: local('Snell Roundhand Bold'), local('SnellRoundhand-Bold'),
+         url('../assets/fonts/SnellRoundhand.ttc') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SnellRoundhand';
+    src: local('Snell Roundhand'), local('SnellRoundhand'),
+         url('../assets/fonts/SnellRoundhand.ttc') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ----- TOKENS ----- */
+:root {
+    --cream:   #f4efe6;
+    --scarlet: #8b1a1a;
+    --oxblood: #6b1e1e;
+    --black:   #1a1a1a;
+
+    --font-display: 'SnellRoundhand', cursive;
+    --font-body:    'Cormorant Garamond', Georgia, serif;
+
+    --paper: url('../assets/images/seamless_paper_texture.webp');
+}
+
+/* ----- RESET ----- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background-color: var(--cream);
+    background-image: var(--paper);
+    background-size: auto;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    color: var(--black);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img { display: block; max-width: 100%; }
+a   { color: inherit; }
+
+/* ----- BACKGROUND UTILITY ----- */
+/* sections that should match the body background exactly */
+.textured {
+    background-color: transparent;
+}
+
+/* =========================================
+   NAVIGATION
+   ========================================= */
+.nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 52px;
+    transition: background 0.4s ease, padding 0.3s ease, box-shadow 0.4s ease;
+}
+
+.nav.scrolled {
+    background-color: var(--cream);
+    padding: 18px 52px;
+    box-shadow: 0 1px 0 rgba(26, 26, 26, 0.1);
+}
+
+/* Dark-hero pages: nav text is cream until scrolled */
+.nav[data-hero="dark"] .nav-logo,
+.nav[data-hero="dark"] .nav-links li a {
+    color: var(--cream);
+}
+.nav[data-hero="dark"] .nav-divider {
+    background-color: var(--cream);
+    opacity: 0.45;
+}
+.nav[data-hero="dark"].scrolled .nav-logo,
+.nav[data-hero="dark"].scrolled .nav-links li a {
+    color: var(--scarlet);
+}
+.nav[data-hero="dark"].scrolled .nav-divider {
+    background-color: var(--scarlet);
+    opacity: 0.3;
+}
+
+.nav-logo {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 2.3rem;
+    color: var(--scarlet);
+    text-decoration: none;
+    line-height: 1;
+    letter-spacing: -0.01em;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+.nav-links li a {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--scarlet);
+    text-decoration: none;
+    padding: 4px 18px;
+    letter-spacing: 0.04em;
+    transition: opacity 0.2s ease;
+}
+
+.nav-links li a:hover  { opacity: 0.55; }
+.nav-links li a.active { font-style: italic; }
+
+.nav-divider {
+    width: 1px;
+    height: 15px;
+    background-color: var(--scarlet);
+    opacity: 0.3;
+    flex-shrink: 0;
+    margin: 0 6px;
+}
+
+/* =========================================
+   SHARED COMPONENTS
+   ========================================= */
+
+/* Section tagline — used on every page */
+.section-tagline {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: clamp(1.5rem, 2.4vw, 2.5rem);
+    font-weight: 400;
+    color: var(--scarlet);
+    letter-spacing: 0.01em;
+    line-height: 1.4;
+}
+
+/* Fade-in animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
+   HOME — HERO
+   ========================================= */
+.home-hero {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+}
+.home-hero.textured {
+    background-color: var(--cream);
+    background-image: var(--texture);
+    background-size: var(--texture-size);
+}
+
+.home-hero-text {
+    position: relative;
+    z-index: 2;
+    padding: 19vh 5% 0 6%;
+}
+
+.wordmark {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(5rem, 11.5vw, 13.5rem);
+    color: var(--scarlet);
+    line-height: 0.88;
+    display: block;
+    letter-spacing: -0.02em;
+}
+
+.wordmark-sub {
+    font-family: var(--font-body);
+    font-size: clamp(0.8rem, 1.15vw, 1.25rem);
+    font-weight: 400;
+    color: var(--scarlet);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-top: 0.55rem;
+    padding-left: 0.5em;
+}
+
+.home-hero-illustration {
+    position: absolute;
+    right: -8%;
+    top: 0;
+    width: 75%;
+    max-width: 1080px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.home-hero-illustration img {
+    width: 100%;
+    height: auto;
+    mix-blend-mode: multiply;
+}
+
+/* =========================================
+   HOME — TAGLINE STRIP
+   ========================================= */
+.home-tagline {
+    padding: 110px 52px 120px;
+    text-align: center;
+}
+
+/* =========================================
+   HOME — SPLIT SECTION
+   ========================================= */
+.home-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 65vh;
+}
+
+.home-split-photo {
+    overflow: hidden;
+    position: relative;
+}
+
+.home-split-photo::after {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(139, 26, 26, 0.45);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.home-split-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.home-split-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 72px;
+    gap: 26px;
+}
+
+.home-split-lede {
+    font-size: clamp(1.1rem, 1.5vw, 1.35rem) !important;
+    font-style: italic !important;
+    opacity: 1 !important;
+    color: var(--scarlet) !important;
+    line-height: 1.7 !important;
+}
+
+.home-split-text p {
+    font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+    font-weight: 400;
+    color: var(--oxblood);
+    line-height: 1.9;
+    opacity: 0.88;
+    max-width: 440px;
+}
+
+.cta-link {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--scarlet);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid var(--scarlet);
+    padding-bottom: 2px;
+    align-self: flex-start;
+    transition: opacity 0.2s ease;
+}
+.cta-link:hover { opacity: 0.55; }
+
+/* =========================================
+   BRANDS — HERO
+   ========================================= */
+.brands-hero {
+    position: relative;
+    min-height: 100vh;
+    background-image: url('../assets/images/kira-beads.jpg');
+    background-size: cover;
+    background-position: center 35%;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 11vh;
+}
+
+.brands-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(8, 2, 2, 0.28) 0%,
+        rgba(8, 2, 2, 0.04) 40%,
+        rgba(8, 2, 2, 0.58) 100%
+    );
+}
+
+.brands-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 7%;
+    max-width: 860px;
+}
+
+.brands-hero-tagline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.8rem, 5.5vw, 5.8rem);
+    color: var(--scarlet);
+    line-height: 1.08;
+    margin-bottom: 1.5rem;
+}
+
+.brands-hero-sub {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 1.55vw, 1.35rem);
+    font-weight: 500;
+    color: var(--scarlet);
+    line-height: 1.7;
+    max-width: 520px;
+}
+
+/* =========================================
+   BRANDS — REPRESENTING SECTION
+   ========================================= */
+.representing-section {
+    padding: 104px 52px 136px;
+    text-align: center;
+    border-top: 1px solid rgba(26, 26, 26, 0.07);
+}
+
+.representing-heading {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(3.5rem, 8vw, 8.5rem);
+    color: var(--scarlet);
+    line-height: 1;
+    margin-bottom: 72px;
+}
+
+.brands-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+
+.brand-item {
+    font-family: var(--font-body);
+    font-size: clamp(1.5rem, 2.7vw, 2.9rem);
+    font-weight: 400;
+    color: var(--scarlet);
+    padding: 28px 24px;
+    text-decoration: none;
+    display: block;
+    letter-spacing: 0.02em;
+    text-align: center;
+    position: relative;
+    transition: opacity 0.3s ease;
+}
+
+.brand-item:hover {
+    opacity: 0.62;
+}
+
+/* Brand descriptor — always visible */
+.brand-desc {
+    display: block;
+    font-size: clamp(0.72rem, 0.9vw, 0.88rem);
+    font-style: italic;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--oxblood);
+    opacity: 0.5;
+    margin-top: 5px;
+    line-height: 1;
+    transition: opacity 0.3s ease;
+}
+
+.brand-item:hover .brand-desc {
+    opacity: 0.82;
+}
+
+/* Calligraphic divider rule */
+.brands-rule {
+    padding: 0 52px;
+    margin: 0 0 56px;
+}
+
+.brands-rule-svg {
+    display: block;
+    width: 100%;
+    height: 20px;
+    overflow: visible;
+}
+
+/* Territory anchor */
+.brands-territory {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: clamp(0.8rem, 1vw, 1rem);
+    font-weight: 300;
+    color: var(--scarlet);
+    letter-spacing: 0.18em;
+    opacity: 0.6;
+    margin-bottom: 64px;
+    margin-top: -20px;
+}
+
+/* Photo interlude between hero and representing */
+.brands-interlude {
+    width: 100%;
+    height: clamp(280px, 40vw, 560px);
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 0 0 1px rgba(26, 26, 26, 0.1);
+}
+
+.brands-interlude::after {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(139, 26, 26, 0.45);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.brands-interlude img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+}
+
+/* Photo break between brand lists */
+.brands-photo-break {
+    width: 100%;
+    max-width: 820px;
+    margin: 60px auto;
+    height: clamp(240px, 34vw, 480px);
+    overflow: hidden;
+    position: relative;
+}
+
+.brands-photo-break img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+}
+
+.brands-photo-break::after {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(139, 26, 26, 0.45);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Single-column brand list */
+.brands-list {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+/* =========================================
+   CONTACT — HERO
+   ========================================= */
+.contact-hero {
+    position: relative;
+    height: 72vh;
+    min-height: 480px;
+    background-image: url('../assets/images/green-bunk.jpg');
+    background-size: cover;
+    background-position: center 50%;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 10vh;
+}
+
+.contact-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(8, 2, 2, 0.18) 0%,
+        rgba(8, 2, 2, 0.0) 35%,
+        rgba(8, 2, 2, 0.52) 100%
+    );
+}
+
+.contact-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 7%;
+}
+
+.contact-hero-tagline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(3rem, 6.5vw, 7rem);
+    color: var(--cream);
+    line-height: 1.05;
+}
+
+/* =========================================
+   CONTACT — SECTION
+   ========================================= */
+.contact-section {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 0;
+    min-height: 60vh;
+    padding: 96px 7% 112px;
+    align-items: start;
+    border-top: 1px solid rgba(26, 26, 26, 0.07);
+}
+
+/* =========================================
+   CONTACT — INFO
+   ========================================= */
+.contact-info {
+    padding-right: 64px;
+    padding-top: 8px;
+}
+
+.contact-info-name {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.2rem, 3.5vw, 3.8rem);
+    color: var(--scarlet);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.contact-info-title {
+    font-family: var(--font-body);
+    font-size: clamp(0.78rem, 0.95vw, 0.92rem);
+    font-weight: 400;
+    color: var(--scarlet);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 2.4rem;
+}
+
+.contact-info-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 2.4rem;
+}
+
+.contact-info-details a {
+    font-family: var(--font-body);
+    font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+    font-weight: 400;
+    color: var(--oxblood);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+}
+
+.contact-info-details a:hover { opacity: 0.5; }
+
+.contact-info-territory {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: clamp(0.75rem, 0.9vw, 0.88rem);
+    font-weight: 300;
+    color: var(--scarlet);
+    letter-spacing: 0.14em;
+    opacity: 0.5;
+}
+
+/* =========================================
+   CONTACT — FORM
+   ========================================= */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group input,
+.form-group textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(139, 26, 26, 0.28);
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+    font-weight: 400;
+    color: var(--black);
+    width: 100%;
+    padding: 10px 0;
+    outline: none;
+    transition: border-color 0.25s ease;
+    resize: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-bottom-color: var(--scarlet);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: inherit;
+    color: var(--scarlet);
+    opacity: 0.38;
+    letter-spacing: 0.04em;
+}
+
+.form-submit {
+    align-self: flex-start;
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--scarlet);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid rgba(26, 26, 26, 0.38);
+    padding: 13px 38px;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    margin-top: 8px;
+}
+
+.form-submit:hover {
+    background-color: var(--scarlet);
+    color: var(--cream);
+    border-color: var(--scarlet);
+}
+
+/* =========================================
+   ABOUT — HERO
+   ========================================= */
+.about-hero {
+    padding: 22vh 7% 10vh;
+    max-width: 820px;
+}
+
+.about-hero-name {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(4rem, 9vw, 10rem);
+    color: var(--scarlet);
+    line-height: 0.9;
+    display: block;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.4rem;
+}
+
+.about-hero-anchor {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: clamp(1rem, 1.5vw, 1.3rem);
+    font-weight: 300;
+    color: var(--scarlet);
+    letter-spacing: 0.05em;
+    opacity: 0.75;
+    line-height: 1.6;
+}
+
+/* =========================================
+   ABOUT — SPLIT
+   ========================================= */
+.about-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 72vh;
+}
+
+.about-split-photo {
+    overflow: hidden;
+    position: relative;
+    background-color: #e8e0d4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-split-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.about-split-photo::after {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(139, 26, 26, 0.45);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.about-photo-placeholder {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--scarlet);
+    opacity: 0.45;
+    letter-spacing: 0.06em;
+    text-align: center;
+    padding: 24px;
+}
+
+.about-split-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 72px;
+    gap: 22px;
+}
+
+.about-split-text p {
+    font-size: clamp(0.95rem, 1.2vw, 1.12rem);
+    font-weight: 400;
+    color: var(--oxblood);
+    line-height: 1.95;
+    opacity: 0.9;
+    max-width: 480px;
+}
+
+.about-lede {
+    font-size: clamp(1.05rem, 1.45vw, 1.28rem) !important;
+    font-style: italic !important;
+    color: var(--scarlet) !important;
+    opacity: 1 !important;
+    line-height: 1.75 !important;
+}
+
+/* =========================================
+   ABOUT — TERRITORY CALLOUT
+   ========================================= */
+.about-territory {
+    padding: 90px 52px 100px;
+    text-align: center;
+    border-top: 1px solid rgba(26, 26, 26, 0.07);
+}
+
+.about-territory-label {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: clamp(0.78rem, 0.95vw, 0.92rem);
+    font-weight: 300;
+    color: var(--scarlet);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin-bottom: 18px;
+}
+
+.about-territory-states {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.2rem, 4.5vw, 5rem);
+    color: var(--scarlet);
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+}
+
+/* =========================================
+   CONTACT — PLACEHOLDER
+   ========================================= */
+.page-placeholder {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+}
+.page-placeholder p {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--scarlet);
+    opacity: 0.5;
+}
+
+/* =========================================
+   SITE FOOTER
+   ========================================= */
+.site-footer {
+    padding: 52px 0 52px;
+    text-align: center;
+}
+
+.site-footer-rule {
+    height: 1px;
+    background-color: var(--scarlet);
+    opacity: 0.45;
+    margin: 0 52px;
+}
+
+.site-footer-wordmark {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 2.6rem;
+    color: var(--scarlet);
+    display: block;
+    line-height: 1;
+    margin: 28px 0 12px;
+}
+
+.site-footer-copy {
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    font-weight: 300;
+    color: var(--scarlet);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.42;
+}
