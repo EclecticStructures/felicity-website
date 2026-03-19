@@ -922,7 +922,7 @@ a   { color: inherit; }
     .nav-links.open { display: flex; }
 
     .nav-links li a {
-        padding: 12px 28px;
+        padding: 18px 28px;
         font-size: 1.1rem;
     }
     .nav-divider { display: none; }
@@ -948,13 +948,13 @@ a   { color: inherit; }
         text-align: center;
     }
     .home-hero-illustration {
-        left: 0;
-        right: 0;
-        width: 100%;
+        left: -22%;
+        right: auto;
+        width: 144%;
         max-width: none;
     }
     .wordmark {
-        font-size: clamp(3.8rem, 17vw, 6rem);
+        font-size: clamp(5.5rem, 24vw, 8rem);
     }
     .wordmark-sub {
         padding-left: 0;
