@@ -339,7 +339,7 @@ a   { color: inherit; }
     font-family: var(--font-display);
     font-weight: 400;
     font-size: clamp(2.8rem, 5.5vw, 5.8rem);
-    color: var(--scarlet);
+    color: var(--cream);
     line-height: 1.08;
     margin-bottom: 1.5rem;
 }
@@ -348,7 +348,7 @@ a   { color: inherit; }
     font-family: var(--font-body);
     font-size: clamp(1rem, 1.55vw, 1.35rem);
     font-weight: 500;
-    color: var(--scarlet);
+    color: var(--cream);
     line-height: 1.7;
     max-width: 520px;
 }
