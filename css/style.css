@@ -712,7 +712,7 @@ a   { color: inherit; }
    ========================================= */
 .about-split {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 3fr;
     min-height: 72vh;
 }
 
@@ -916,14 +916,15 @@ a   { color: inherit; }
         background-image: var(--paper);
         flex-direction: column;
         align-items: flex-start;
-        padding: 8px 0 24px;
+        padding: 16px 0 40px;
+        gap: 8px;
         box-shadow: 0 8px 32px rgba(26, 26, 26, 0.1);
     }
     .nav-links.open { display: flex; }
 
     .nav-links li a {
-        padding: 22px 28px;
-        font-size: 1.1rem;
+        padding: 20px 28px;
+        font-size: 1.35rem;
     }
     .nav-divider { display: none; }
 
@@ -1007,8 +1008,8 @@ a   { color: inherit; }
     /* ABOUT SPLIT — stack vertically */
     .about-split { grid-template-columns: 1fr; }
     .about-split-photo {
-        height: 85vw;
-        min-height: 280px;
+        height: 65vw;
+        min-height: 240px;
     }
     .about-split-text {
         padding: 48px 28px 64px;
