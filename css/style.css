@@ -211,10 +211,10 @@ a   { color: inherit; }
 
 .home-hero-illustration {
     position: absolute;
-    right: -8%;
+    right: -4%;
     top: 0;
-    width: 75%;
-    max-width: 1080px;
+    width: 82%;
+    max-width: 1180px;
     z-index: 1;
     pointer-events: none;
 }
@@ -225,12 +225,24 @@ a   { color: inherit; }
     mix-blend-mode: multiply;
 }
 
+/* Inset frame embroidery on home hero */
+.home-hero::after {
+    content: '';
+    position: absolute;
+    inset: 16px;
+    border: 1px solid rgba(26, 26, 26, 0.28);
+    pointer-events: none;
+    z-index: 10;
+}
+
 /* =========================================
    HOME — TAGLINE STRIP
    ========================================= */
 .home-tagline {
     padding: 110px 52px 120px;
     text-align: center;
+    border-top: 1px solid rgba(26, 26, 26, 0.12);
+    border-bottom: 1px solid rgba(26, 26, 26, 0.12);
 }
 
 /* =========================================
@@ -681,8 +693,38 @@ a   { color: inherit; }
    ABOUT — HERO
    ========================================= */
 .about-hero {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    min-height: 80vh;
+    overflow: hidden;
+}
+
+.about-hero-text {
     padding: 22vh 7% 10vh;
-    max-width: 820px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.about-hero-photo {
+    overflow: hidden;
+    position: relative;
+}
+
+.about-hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.about-hero-photo::after {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(139, 26, 26, 0.45);
+    pointer-events: none;
+    z-index: 2;
 }
 
 .about-hero-name {
@@ -708,56 +750,19 @@ a   { color: inherit; }
 }
 
 /* =========================================
-   ABOUT — SPLIT
+   ABOUT — SPLIT (text-forward, no photo)
    ========================================= */
 .about-split {
-    display: grid;
-    grid-template-columns: 2fr 3fr;
-    min-height: 72vh;
-}
-
-.about-split-photo {
-    overflow: hidden;
-    position: relative;
-    background-color: #e8e0d4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.about-split-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.about-split-photo::after {
-    content: '';
-    position: absolute;
-    inset: 10px;
-    border: 1px solid rgba(139, 26, 26, 0.45);
-    pointer-events: none;
-    z-index: 2;
-}
-
-.about-photo-placeholder {
-    font-family: var(--font-body);
-    font-style: italic;
-    font-size: 0.95rem;
-    font-weight: 300;
-    color: var(--scarlet);
-    opacity: 0.45;
-    letter-spacing: 0.06em;
-    text-align: center;
-    padding: 24px;
+    padding: 80px 10% 96px;
+    border-top: 1px solid rgba(26, 26, 26, 0.07);
 }
 
 .about-split-text {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 80px 72px;
     gap: 22px;
+    max-width: 680px;
+    margin: 0 auto;
 }
 
 .about-split-text p {
@@ -766,7 +771,6 @@ a   { color: inherit; }
     color: var(--oxblood);
     line-height: 1.95;
     opacity: 0.9;
-    max-width: 480px;
 }
 
 .about-lede {
@@ -778,12 +782,43 @@ a   { color: inherit; }
 }
 
 /* =========================================
-   ABOUT — TERRITORY CALLOUT
+   ABOUT — TERRITORY CALLOUT + PHOTO
    ========================================= */
 .about-territory {
-    padding: 90px 52px 100px;
-    text-align: center;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
     border-top: 1px solid rgba(26, 26, 26, 0.07);
+    overflow: hidden;
+}
+
+.about-territory-photo {
+    overflow: hidden;
+    position: relative;
+}
+
+.about-territory-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+}
+
+.about-territory-photo::after {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(139, 26, 26, 0.45);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.about-territory-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 52px 68px;
+    text-align: center;
 }
 
 .about-territory-label {
@@ -1002,22 +1037,21 @@ a   { color: inherit; }
     }
     .contact-info { padding-right: 0; }
 
-    /* ABOUT HERO */
-    .about-hero { padding: 18vh 6% 8vh; }
+    /* ABOUT HERO — stack photo below text on mobile */
+    .about-hero { grid-template-columns: 1fr; min-height: auto; }
+    .about-hero-text { padding: 18vh 6% 8vh; }
+    .about-hero-photo { height: 62vw; min-height: 220px; }
 
-    /* ABOUT SPLIT — stack vertically */
-    .about-split { grid-template-columns: 1fr; }
-    .about-split-photo {
-        height: 65vw;
+    /* ABOUT SPLIT — text only, tighten padding */
+    .about-split { padding: 52px 7% 64px; }
+
+    /* ABOUT TERRITORY — stack photo above text */
+    .about-territory { grid-template-columns: 1fr; }
+    .about-territory-photo {
+        height: 72vw;
         min-height: 240px;
     }
-    .about-split-text {
-        padding: 48px 28px 64px;
-    }
-    .about-split-text p { max-width: 100%; }
-
-    /* ABOUT TERRITORY */
-    .about-territory { padding: 64px 28px 72px; }
+    .about-territory-content { padding: 56px 28px 72px; }
 
     /* FOOTER */
     .site-footer      { padding: 14px 0 40px; }
